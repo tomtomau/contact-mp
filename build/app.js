@@ -16,66 +16,86 @@
     'use strict';
 
 
-    angular.module('contact-mp-main', ['ngRoute'])
-        .config(function ($routeProvider) {
-            $routeProvider
-                .when('/', {
-                    templateUrl: 'main/main.html',
-                    controller: 'MainCtrl'
-                });
-        })
-        .controller('MainCtrl', function ($scope) {
-            // Ministers
-            $scope.ministers = [
-                {
-                    name: 'Tony Abbott',
-                    electorate: 'Warringah',
-                    selected: false
-                },
-                {
-                    name: 'Anthony Albanese',
-                    electorate: 'Grayndler',
-                    selected: false
+    angular.module('contact-mp-main', ['ngRoute', 'textAngular'])
+        .config(function ($routeProvider, $provide) {
+                // this demonstrates how to register a new tool and add it to the default toolbar
+                $provide.decorator('taOptions', ['$delegate', function (taOptions) {
+                    // Controls for textAngular
+                    taOptions.toolbar = [
+                        ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'pre', 'quote'],
+                        ['bold', 'italics', 'underline', 'ul', 'ol', 'redo', 'undo', 'clear'],
+                        ['justifyLeft', 'justifyCenter', 'justifyRight'],
+                    ];
+                    taOptions.classes = {
+                        focussed: 'focussed',
+                        toolbar: 'btn-toolbar',
+                        toolbarGroup: 'btn-group',
+                        toolbarButton: 'btn btn-default',
+                        toolbarButtonActive: 'active',
+                        disabled: 'disabled',
+                        textEditor: 'form-control',
+                        htmlEditor: 'form-control'
+                    };
+                    return taOptions;
+                }]);
+                $routeProvider
+                    .when('/', {
+                        templateUrl: 'main/main.html',
+                        controller: 'MainCtrl'
+                    });
+            })
+            .controller('MainCtrl', function ($scope) {
+                // Ministers
+                $scope.ministers = [
+                    {
+                        name: 'Tony Abbott',
+                        electorate: 'Warringah',
+                        selected: false
+                    },
+                    {
+                        name: 'Anthony Albanese',
+                        electorate: 'Grayndler',
+                        selected: false
+                    }
+                ];
+
+                function filterSelectedMinisters(minister) {
+                    return minister.selected;
                 }
-            ];
 
-            function filterSelectedMinisters(minister) {
-                return minister.selected;
-            }
+                $scope.selectedMinisters = function () {
+                    return $scope.ministers.filter(filterSelectedMinisters);
+                };
 
-            $scope.selectedMinisters = function () {
-                return $scope.ministers.filter(filterSelectedMinisters);
-            };
+                $scope.toggleMinister = function (minister) {
+                    minister.selected = !minister.selected;
+                };
 
-            $scope.toggleMinister = function (minister) {
-                minister.selected = !minister.selected;
-            };
+                // Questions
+                $scope.questions = [
+                    {
+                        id: 1,
+                        text: "This is question 1",
+                        selected: false
+                    },
+                    {
+                        id: 2,
+                        text: "This is question 2",
+                        selected: false
+                    }
+                ];
 
-            // Questions
-            $scope.questions = [
-                {
-                    id: 1,
-                    text: "This is question 1",
-                    selected: false
-                },
-                {
-                    id: 2,
-                    text: "This is question 2",
-                    selected: false
+                function filterSelectedQuestions(question) {
+                    return question.selected;
                 }
-            ];
 
-            function filterSelectedQuestions(question){
-                return question.selected;
-            }
+                $scope.selectedQuestions = function () {
+                    return $scope.questions.filter(filterSelectedQuestions);
+                };
 
-            $scope.selectedQuestions = function(){
-                return $scope.questions.filter(filterSelectedQuestions);
-            };
-
-            $scope.toggleQuestion = function(question){
-                question.selected = !question.selected;
-            };
-        });
+                $scope.toggleQuestion = function (question) {
+                    question.selected = !question.selected;
+                };
+            });
 
 })();
