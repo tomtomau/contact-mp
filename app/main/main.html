@@ -1,6 +1,20 @@
-<h3>List of Awesome Things</h3>
-<ul>
-    <li ng-repeat="thing in awesomeThings">
-    {{thing}}
-    </li>
-</ul>
+<h1>Contact MP</h1>
+<div>
+    <h2>Select members to contact</h2>
+    <ul>
+        <li ng-repeat="minister in ministers">
+            <a href="javascript:void(0)" ng-click="toggleMinister(minister)" ng-class="{ 'active' : minister.selected }">{{ minister.name }}</a>
+        </li>
+    </ul>
+</div>
+<div ng-show="selectedMinisters().length">
+    <h2>Now that you've selected some members, lets choose some questions to ask</h2>
+    <ul>
+        <li ng-repeat="question in questions">
+            <a href="javascript:void(0)" ng-click="toggleQuestion(question)" ng-class="{ 'active' : question.selected }">{{ question.text }}</a>
+        </li>
+    </ul>
+</div>
+<div ng-show="selectedQuestions().length">
+    <h2>Hard hitting questions!</h2>
+</div>

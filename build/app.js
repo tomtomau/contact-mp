@@ -1,3 +1,17 @@
+(function(){
+	'use strict';
+
+	angular.module('contact-mp', [ 'ngRoute','contact-mp-main','templates' ])
+	  .config(function ($routeProvider) {
+	    $routeProvider
+	      .otherwise({
+	        redirectTo: '/'
+	      });
+	  });
+	  
+})();
+'app controller goes here';
+'common service goes here';
 (function () {
     'use strict';
 
