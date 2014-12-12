@@ -79,12 +79,57 @@
                 $scope.questions = [
                     {
                         id: 1,
-                        text: "This is question 1",
+                        text: "Do you believe that people commit an offence by arriving in Australia without permission and seeking asylum? If Yes, what offence do they commit? ",
                         selected: false
                     },
                     {
                         id: 2,
-                        text: "This is question 2",
+                        text: "Do you consider that people who arrive in Australia informally and seek asylum should be called \"illegal\"?",
+                        selected: false
+                    },
+                    {
+                        id: 3,
+                        text: "Do you believe it is right to imprison children who have not committed any offence?",
+                        selected: false
+                    },
+                    {
+                        id: 4,
+                        text: "Do you believe it is right to imprison women who have not committed any offence?",
+                        selected: false
+                    },
+                    {
+                        id: 5,
+                        text: "Do you believe it is right to imprison people who have not committed any offence?",
+                        selected: false
+                    },
+                    {
+                        id: 6,
+                        text: "Should asylum seekers who arrive in Australia be treated humanely, decently, fairly?",
+                        selected: false
+                    },
+                    {
+                        id: 7,
+                        text: "In your opinion, are asylum seekers who arrive in Australia treated humanely, decently, fairly?",
+                        selected: false
+                    },
+                    {
+                        id: 8,
+                        text: "Do you believe that people who arrive in Australia informally and seek asylum should be detained?  If yes, for how long should they be detained, and why?",
+                        selected: false
+                    },
+                    {
+                        id: 9,
+                        text: "Do you believe that people who arrive in Australia informally and seek asylum should be sent to other countries for processing?  If so, why?",
+                        selected: false
+                    },
+                    {
+                        id: 10,
+                        text: "How much does it cost Australia each year to pursue its current policy of deterrence in relation to asylum seekers who arrive by boat?",
+                        selected: false
+                    },
+                    {
+                        id: 11,
+                        text: "Do you believe Australia's policy of indefinite mandatory detention of asylum seekers is necessary, humane, decent, fair?",
                         selected: false
                     }
                 ];
