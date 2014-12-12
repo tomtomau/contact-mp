@@ -3,7 +3,7 @@
     <h2>Select members to contact</h2>
     <ul>
         <li ng-repeat="minister in ministers">
-            <a href="javascript:void(0)" ng-click="toggleMinister(minister)" ng-class="{ 'active' : minister.selected }">{{ minister.name }}</a>
+            <a href="javascript:void(0)" ng-click="toggleMinister(minister)" ng-class="{ 'active' : minister.selected }">{{ minister.preferred_name.length ? minister.preferred_name : minister.first_name }} {{ minister.surname }}</a>
         </li>
     </ul>
 </div>

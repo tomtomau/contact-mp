@@ -30,20 +30,24 @@
                         controller: 'MainCtrl'
                     });
             })
-            .controller('MainCtrl', function ($scope) {
+            .controller('MainCtrl', function ($scope, $http) {
                 // Ministers
                 $scope.ministers = [
-                    {
-                        name: 'Tony Abbott',
-                        electorate: 'Warringah',
-                        selected: false
-                    },
-                    {
-                        name: 'Anthony Albanese',
-                        electorate: 'Grayndler',
-                        selected: false
-                    }
+
                 ];
+
+                $http.get('data/australian-mp.json').
+                    success(function(data, status, headers, config) {
+                        // Lets just add in a .selected field
+                        $scope.ministers = data.map(function(minister){
+                            return angular.extend(minister, {
+                                selected: false
+                            });
+                        });
+                    }).
+                    error(function(data, status, headers, config) {
+                        alert('an error occurred');
+                    });
 
                 function filterSelectedMinisters(minister) {
                     return minister.selected;
