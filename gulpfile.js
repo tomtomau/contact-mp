@@ -1,4 +1,6 @@
 var gulp = require('gulp');
+var less = require('gulp-less');
+var path = require('path');
 var plugins = require("gulp-load-plugins")({lazy:false});
 
 gulp.task('scripts', function(){
@@ -18,8 +20,16 @@ gulp.task('templates',function(){
         .pipe(gulp.dest('./build'));
 });
 
+gulp.task('less', function(){
+    gulp.src('./app/less/**/main.less')
+        .pipe(less({
+            paths: [ path.join(__dirname, 'less', 'includes') ]
+        }))
+        .pipe(gulp.dest('./app/css'));
+});
+
 gulp.task('css', function(){
-    gulp.src('./app/**/*.css')
+    gulp.src('./app/css/main.css')
         .pipe(plugins.concat('app.css'))
         .pipe(gulp.dest('./build'));
 });
@@ -51,13 +61,14 @@ gulp.task('watch',function(){
     gulp.watch([
         'build/**/*.html',        
         'build/**/*.js',
-        'build/**/*.css'        
+        'build/**/*.css'
     ], function(event) {
         return gulp.src(event.path)
             .pipe(plugins.connect.reload());
     });
     gulp.watch(['./app/**/*.js','!./app/**/*test.js'],['scripts']);
     gulp.watch(['!./app/index.html','./app/**/*.html'],['templates']);
+    gulp.watch('./app/**/*.less',['less']);
     gulp.watch('./app/**/*.css',['css']);
     gulp.watch('./app/index.html',['copy-index']);
 
@@ -69,4 +80,4 @@ gulp.task('connect', plugins.connect.server({
     livereload: true
 }));
 
-gulp.task('default',['connect','scripts','templates','css','copy-index','vendorJS','vendorCSS','watch']);
+gulp.task('default',['connect','scripts','templates','less','css','copy-index','vendorJS','vendorCSS','watch']);
