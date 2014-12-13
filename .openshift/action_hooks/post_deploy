@@ -1,0 +1,2 @@
+#!/bin/sh
+cp -R $OPENSHIFT_REPO_DIR/.htaccess.dist $OPENSHIFT_REPO_DIR/.htaccess
