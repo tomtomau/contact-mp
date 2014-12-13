@@ -31,10 +31,8 @@
                     });
             })
             .controller('MainCtrl', function ($scope, $http) {
-                // Ministers
-                $scope.ministers = [
-
-                ];
+                // Ministers - empty array, we'll populate this from the JSON file.
+                $scope.ministers = [];
 
                 $http.get('data/australian-mp.json').
                     success(function(data, status, headers, config) {
@@ -131,6 +129,13 @@
                 $scope.toggleQuestion = function (question) {
                     question.selected = !question.selected;
                 };
-            });
 
+                $scope.message = "";
+
+                $scope.buildMessage = function(){
+                    $scope.message = $scope.selectedQuestions().map(function(message){
+                       return "<p>"+message.text+"</p>";
+                    }).join('');
+                };
+            });
 })();
